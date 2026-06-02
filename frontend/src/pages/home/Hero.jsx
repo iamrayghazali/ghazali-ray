@@ -1,45 +1,38 @@
-import { Link } from "react-router-dom";
-
-import { Highlighter } from "@/components/ui/highlighter";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import {LightRays} from "@/components/ui/light-rays.jsx";
-import {TypingAnimation} from "@/components/ui/typing-animation.jsx";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 
 export default function Hero() {
+    const containerRef = useRef(null);
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end start"],
+    });
+
+    const scale   = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
+    const opacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
+    const y       = useTransform(scrollYProgress, [0, 1], [0, -40]);
+
     return (
-        <section className="relative min-h-screen overflow-hidden  text-foreground">
-            {/* Content */}
-            <div className="mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 sm:px-10">
+        <section ref={containerRef} className="relative h-[140vh]">
 
-                <div className="max-w-4xl">
+            <div className="sticky top-0 h-screen overflow-hidden">
 
-
-                    <h1 className="text-5xl font-black leading-[0.95] tracking-tight sm:text-7xl md:text-8xl xl:text-[9rem]">
-                        Ray {" "}
-                        <Highlighter action="underline" color="#f97316" iterations={3} animationDuration={1500}>
-                            Ghazali
-                        </Highlighter>
-                    </h1>
-                    <p className="mb-6 text-sm tracking-[0.3em] text-muted-foreground uppercase">
-                        <TypingAnimation startOnView cursorStyle="underscore">
+                <motion.div
+                    style={{ scale, opacity, y }}
+                    className="absolute inset-0 flex flex-col items-center justify-center pb-32 will-change-transform"
+                >
+                    <p className="mb-4 text-xs tracking-[0.3em] text-muted-foreground uppercase">
                         Full Stack Developer
-
-                        </TypingAnimation>
                     </p>
 
-                    <div className="mt-10">
-                        <Link to="/contact">
-                            <InteractiveHoverButton>
-                                Let&apos;s Talk
-                            </InteractiveHoverButton>
-                        </Link>
-                    </div>
+                    <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black leading-[0.95] tracking-tight text-foreground text-center">
+                        Hi, I'm Ray
+                    </h1>
+                </motion.div>
 
-                </div>
+                <div className="absolute bottom-0 left-0 h-40 w-full bg-gradient-to-t from-background to-transparent pointer-events-none" />
             </div>
-
-            {/* Bottom gradient fade */}
-            <div className="absolute bottom-0 left-0 h-40 w-full bg-gradient-to-t from-background to-transparent" />
 
         </section>
     );
