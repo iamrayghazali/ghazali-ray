@@ -22,11 +22,11 @@ export default function Hero() {
                     style={{ scale, opacity, y }}
                     className="absolute inset-0 flex flex-col items-center justify-center pb-32 will-change-transform"
                 >
-                    <p className="mb-4 text-xs tracking-[0.3em] text-muted-foreground uppercase">
+                    <p className="mb-4 text-xs tracking-[0.3em] text-muted-foreground uppercase text-shadow">
                         Full Stack Developer
                     </p>
 
-                    <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black leading-[0.95] tracking-tight text-foreground text-center">
+                    <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black leading-[0.95] tracking-tight text-foreground text-center text-shadow">
                         Hi, I'm Ray
                     </h1>
                 </motion.div>
