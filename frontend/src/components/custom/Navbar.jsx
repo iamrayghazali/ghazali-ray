@@ -20,10 +20,7 @@ export default function Navbar({ showNavbarBrand }) {
     const { pathname } = location;
 
     const hidden = useScrollDirection();
-
-    useEffect(() => {
-        console.log(pathname);
-    }, []);
+    // TODO add local storage for default theme set like in useEffect
 
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out
