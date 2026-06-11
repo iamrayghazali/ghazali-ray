@@ -1,16 +1,24 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+import { Resend } from "resend";
 import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.use(cors({ origin: process.env.FRONTEND_URL }));
+app.use(helmet());
+
 
 app.use(express.json());
 
 const emailSentAt = new Map();
-const COOLDOWN_MS = 2 * 60 * 60 * 1000; // 2 hours
+const COOLDOWN_MS = 2000; // 2 hours
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Rate limiter — 5 requests per 15 min per IP
 const limiter = rateLimit({
@@ -26,6 +34,7 @@ const limiter = rateLimit({
 
 const isValidEmail   = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email?.trim());
 const isValidMessage = (msg)   => msg?.trim().length >= 10 && msg?.trim().length <= 2000;
+const escapeHtml = (str) => str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
 app.get("/", (req, res) => {
     res.json({ message: "Backend running" });
@@ -66,7 +75,7 @@ app.post("/contact", limiter, async (req, res) => {
             to:      process.env.YOUR_EMAIL,
             subject: `New message from ${email}`,
             text:    `From: ${email}\n\n${message}`,
-            html:    `<p><strong>From:</strong> ${email}</p><hr /><p>${message.replace(/\n/g, "<br/>")}</p>`,
+            html:    `<p><strong>From:</strong> ${escapeHtml(email)}</p><hr /><p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>`,
         });
 
         emailSentAt.set(ip, Date.now());
