@@ -9,6 +9,7 @@ import { useState, useMemo } from "react";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field.jsx";
 import { Separator } from "@/components/ui/separator";
 import { validateEmail } from "@/lib/validateEmail";
+import {useNavigate} from "react-router-dom";
 
 const SERVER_ERRORS = {
     RATE_LIMITED:    "Too many attempts. Wait 15 minutes.",
@@ -19,6 +20,7 @@ const SERVER_ERRORS = {
 };
 
 export default function ContactForm() {
+    const navigate = useNavigate();
     const [email, setEmail]               = useState("");
     const [message, setMessage]           = useState("");
     const [emailError, setEmailError]     = useState("");
@@ -96,11 +98,12 @@ export default function ContactForm() {
     if (submitted) {
         return (
             <Card className="w-full max-w-sm mt-10">
-                <CardHeader>
+                <CardHeader className="flex flex-col items-center">
                     <CardTitle className="text-lg">Message sent!</CardTitle>
                     <CardDescription>
                         Thanks for reaching out. I'll get back to you soon.
                     </CardDescription>
+                    <Button variant="secondary" className="mt-5" onClick={() => navigate("/")}>Back to the portfolio ↗</Button>
                 </CardHeader>
             </Card>
         );
