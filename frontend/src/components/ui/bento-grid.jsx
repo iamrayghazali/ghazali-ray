@@ -11,7 +11,7 @@ const BentoGrid = ({
 }) => {
   return (
     <div
-      className={cn("grid w-full auto-rows-[22rem] grid-cols-3 gap-4 p-4", className)}
+      className={cn("grid w-full auto-rows-[12rem] grid-cols-3 gap-4 p-4", className)}
       {...props}>
       {children}
     </div>
@@ -31,7 +31,7 @@ const BentoCard = ({
   <div
     key={name}
     className={cn(
-      "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-xl min-h-40",
+      " group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-xl min-h-40",
       // light styles
       "bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
       // dark styles
@@ -39,18 +39,18 @@ const BentoCard = ({
       className
     )}
     {...props}>
-    <div>
+    <div className="transition-all duration-800 group-hover:blur-sm">
       {background}
     </div>
     <div className="py-2 px-4">
       <div
-        className=" pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
+        className=" pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:translate-y-5 lg:group-hover:-translate-y-10">
         <Icon
-          className="h-12 w-12 origin-left transform-gpu text-neutral-700 transition-all duration-300 ease-in-out" />
-        <h3 className="text-xl font-semibold text-neutral-700 dark:text-neutral-300">
+          className="h-12 w-12 origin-left transform-gpu text-neutral-700 transition-all duration-300 ease-in-out hidden md:flex" />
+        <h3 className="text-2xl font-semibold text-neutral-700 transform-gpu dark:text-white  transition-all duration-300 ease-in-out text-shadow">
           {name}
         </h3>
-        <p className="max-w-lg text-neutral-400 w-full translate-y-10 transform-gpu flex-row items-center opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 lg:flex">{description}</p>
+        <p className="max-w-lg text-neutral-400 w-full lg:translate-y-10 lg:transform-gpu flex-row items-center lg:opacity-0 transition-all duration-300 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:flex">{description}</p>
       </div>
 
       <div
