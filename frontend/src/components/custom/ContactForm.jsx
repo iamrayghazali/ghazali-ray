@@ -129,7 +129,7 @@ export default function ContactForm() {
             <CardContent>
                 <div className="flex flex-col gap-2">
 
-                    <Field data-invalid={!!emailError || undefined}>
+                    <Field >
                         <FieldLabel htmlFor="email">Email</FieldLabel>
                         <Input
                             id="email"
@@ -137,13 +137,15 @@ export default function ContactForm() {
                             placeholder="example@gmail.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            onBlur={handleEmailBlur}   // validate on blur, not on type
+                            onBlur={handleEmailBlur}
                             disabled={submitting}
+                            data-invalid={!!emailError || undefined}
+                            className={`${emailError ? "border-destructive" : ""}`}
                         />
                         {emailError && <FieldDescription className="text-destructive">{emailError}</FieldDescription>}
                     </Field>
 
-                    <Field data-invalid={!!messageError || undefined}>
+                    <Field >
                         <FieldLabel htmlFor="message">Message</FieldLabel>
                         <Textarea
                             id="message"
@@ -153,6 +155,7 @@ export default function ContactForm() {
                             onChange={(e) => setMessage(e.target.value)}
                             onBlur={handleMessageBlur}
                             disabled={submitting}
+                            data-invalid={!!messageError || undefined}
                         />
                         {messageError && <FieldDescription className="text-destructive">{messageError}</FieldDescription>}
                         <p className="text-right text-[10px] text-muted-foreground">
@@ -167,7 +170,7 @@ export default function ContactForm() {
 
                 <CardFooter className="flex flex-col gap-2">
                     <Button
-                        className="min-w-20"
+                        className={`min-w-20 ${canSend ? "" : "cursor-not-allowed"}`}
                         variant="secondary"
                         disabled={!canSend}
                         onClick={handleSubmit}
