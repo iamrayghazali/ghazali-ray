@@ -41,8 +41,6 @@ export default function IphoneNotification({
                     </p>
                 </div>
             </div>
-
-            {/* mobile-only bottom blur fade */}
         </div>
     );
 }
