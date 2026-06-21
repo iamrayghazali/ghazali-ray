@@ -8,8 +8,8 @@ import {TooltipProvider} from "@/components/ui/tooltip.jsx";
 import ProjectsScroll from "@/pages/home/Projectscroll.jsx";
 import ScrollTextReveal from "@/components/custom/ScrollTextReveal.jsx";
 import {FaCss3Alt, FaFigma, FaJava, FaJs, FaReact} from "react-icons/fa";
-import React from "react";
 import {SiExpress, SiMongodb, SiMysql, SiPostgresql, SiTailwindcss, SiTypescript} from "react-icons/si";
+import BackgroundFX from "@/components/custom/BackgroundFX.jsx";
 
 function App() {
 
@@ -46,9 +46,11 @@ function App() {
                 <SiPostgresql className="text-muted-foreground" size={50}/>
             ]
         },
-    ]
+    ];
+
     return (
         <TooltipProvider>
+            <BackgroundFX />
             <LightRays/>
             <SkipButton/>
             <div className="flex justify-center items-center">
@@ -59,9 +61,7 @@ function App() {
                 <ScrollTextReveal key={index} label={tech.label} title={tech.title} description={tech.description} logos={tech.logos} first={index === 0} />
             ))}
             <ProjectsScroll/>
-            <div className="min-h-screen bg-red-400"></div>
-            <div className="min-h-screen bg-amber-200"></div>
-            <div className="min-h-screen bg-green-200"></div>
+
             <Bento></Bento>
         </TooltipProvider>
     )
