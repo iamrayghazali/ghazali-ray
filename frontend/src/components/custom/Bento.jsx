@@ -11,6 +11,7 @@ import { PROJECTS } from "@/providers/projects-provider.js";
 import { MdCode } from "react-icons/md";
 import IphoneNotification from "@/components/custom/IphoneNotification.jsx";
 import favicon from "../../../public/assets/gmail.svg"
+import {SparklesText} from "@/components/ui/sparkles-text.jsx";
 
 
 export default function Bento() {
@@ -37,7 +38,7 @@ export default function Bento() {
             Icon: MdCode,
             name: "Projects",
             description:
-                "Check out my project on GitHub",
+                "Check out my projects on GitHub",
             href: "https://github.com/iamrayghazali",
             cta: "Checkout my projects",
             background: (
@@ -73,6 +74,7 @@ export default function Bento() {
                             "mask-[radial-gradient(300px_circle_at_center,white,transparent)] dark:opacity-40 opacity-70"
                         )}
                     />
+                    <SparklesText sparklesCount={5} colors={{first: "#F8A164", second: "#B04900", third: "#F97316"}} className="text-center">Design that works for you</SparklesText>
                 </>
             ),
             className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-4",
@@ -85,7 +87,7 @@ export default function Bento() {
             cta: "Checkout my projects",
             background: (
                 <>
-                    <div className="flex items-center justify-end mt-2 mr-2">
+                    <div className="flex md:hidden items-center justify-end mt-2 mr-2">
                         <GoProjectRoadmap className="text-5xl dark:opacity-40 opacity-70"></GoProjectRoadmap>
                     </div>
                 </>
@@ -100,7 +102,7 @@ export default function Bento() {
             href: "/",
             cta: "Checkout my projects",
             background: (
-                <div className="flex items-center justify-end mt-2 mr-2">
+                <div className="flex md:hidden items-center justify-end mt-2 mr-2">
                     <BiServer className="text-6xl dark:opacity-40 opacity-70"></BiServer>
                 </div>
             ),
