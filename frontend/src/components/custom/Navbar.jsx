@@ -7,20 +7,17 @@ import {Separator} from "@/components/ui/separator";
 import {Button} from "@/components/ui/button.jsx";
 import { IoHome, IoHomeOutline } from 'react-icons/io5';
 import { IoPerson, IoPersonOutline } from 'react-icons/io5';
-import {useEffect} from "react";
 import {ThemeToggle} from "@/components/custom/ThemeToggle.jsx";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.jsx";
 import { Highlighter } from "@/components/ui/highlighter";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import {NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger} from "@/components/ui/navigation-menu.jsx";
 
-export default function Navbar({ showNavbarBrand }) {
+export default function Navbar() {
     const navigate = useNavigate();
     const location = useLocation();
     const { pathname } = location;
 
     const hidden = useScrollDirection();
-    // TODO add local storage for default theme set like in useEffect
 
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out
@@ -30,7 +27,7 @@ export default function Navbar({ showNavbarBrand }) {
 
             {/* DESKTOP */}
             <div className="hidden md:flex flex-row items-center justify-around gap-5  rounded-none">
-                <h1 className=" font-black leading-[0.95] tracking-tight text-2xl ">
+                <h1 className=" font-black leading-[0.95] tracking-tight text-2xl cursor-pointer" onClick={() => navigate("/")}>
                     Ray {" "}
                     <Highlighter action="underline" color="#f97316" iterations={3} animationDuration={1500}>
                         Ghazali
