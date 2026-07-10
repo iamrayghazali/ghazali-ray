@@ -4,8 +4,6 @@ import { cn } from "@/lib/utils";
 import BrowserMockup from "@/components/custom/BrowserMockup.jsx";
 import { PROJECTS } from "@/providers/projects-provider.js";
 
-// desktop: (n-1) * (cardVw + gapVw) = 3 * (50 + 2) = 156
-// mobile:  (n-1) * (cardVw + gapVw) = 3 * (82 + 2) = 252
 const DESKTOP_TRANSLATE = "-156vw";
 const MOBILE_TRANSLATE  = "-252vw";
 
@@ -62,7 +60,6 @@ export default function ProjectsScroll() {
                     </motion.h2>
                 </div>
 
-                {/* DESKTOP */}
                 <motion.div
                     style={{ x: xDesktop }}
                     className="hidden md:flex gap-8 pl-[8vw] will-change-transform"
@@ -73,7 +70,6 @@ export default function ProjectsScroll() {
                     <div className="w-[30vw] shrink-0" />
                 </motion.div>
 
-                {/* MOBILE */}
                 <motion.div
                     style={{ x: xMobile }}
                     className="flex md:hidden gap-5 pl-[6vw] will-change-transform"
@@ -84,21 +80,53 @@ export default function ProjectsScroll() {
                     <div className="w-[30vw] shrink-0" />
                 </motion.div>
 
+                <div className="flex justify-center gap-2 mt-8">
+                    {PROJECTS.map((project, i) => (
+                        <ProgressDot key={project.id} index={i} count={PROJECTS.length} progress={scrollYProgress} />
+                    ))}
+                </div>
+
             </div>
         </div>
     );
 }
+
+function ProgressDot({ index, count, progress }) {
+    const active = useTransform(progress, [0, 1], [0, count - 1], { clamp: true });
+    const distance = useTransform(active, (v) => Math.abs(v - index));
+
+    const scale = useTransform(distance, [0, 0.5], [1.8, 1], { clamp: true });
+    const opacity = useTransform(distance, [0, 0.5], [1, 0.3], { clamp: true });
+
+    return (
+        <motion.span
+            style={{ scale, opacity }}
+            className="h-1.5 w-1.5 rounded-full bg-foreground will-change-transform"
+        />
+    );
+}
+
+const cardEntrance = {
+    hidden:  { opacity: 0, y: 24, scale: 0.96 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+};
 
 function ProjectCard({ project, mobile }) {
 
     const shortUrl = project.url.split("//")[1];
 
     return (
-        <div
+        <motion.div
             className={cn(
                 "flex flex-col gap-4 shrink-0",
                 mobile ? "w-[82vw]" : "w-[50vw] max-w-2xl"
             )}
+            variants={cardEntrance}
+            initial="hidden"
+            whileInView="visible"
+            whileHover={mobile ? undefined : { y: -6, transition: { duration: 0.25 } }}
+            whileTap={{ scale: 0.98 }}
+            viewport={{ once: true, amount: 0.4 }}
         >
             <div
                 className="w-full rounded-xl overflow-hidden shadow-xl shadow-black/15 border border-border/30"
@@ -132,6 +160,6 @@ function ProjectCard({ project, mobile }) {
                     View ↗
                 </a>
             </div>
-        </div>
+        </motion.div>
     );
 }

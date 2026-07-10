@@ -115,7 +115,7 @@ export default function ContactForm() {
                 <CardTitle className="text-lg">Send a message</CardTitle>
                 <CardDescription>
                     Send me an email here or shoot a message on{" "}
-                    <a href="https://www.linkedin.com/in/raydan-ghazali/" className="text-accent">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/raydan-ghazali/" target="_blank" rel="noopener noreferrer" className="text-accent">LinkedIn</a>
                 </CardDescription>
                 <CardAction>
                     <a href="https://www.linkedin.com/in/raydan-ghazali/" target="_blank" rel="noopener noreferrer">

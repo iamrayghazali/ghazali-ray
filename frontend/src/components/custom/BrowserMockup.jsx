@@ -46,6 +46,9 @@ export default function BrowserMockup({ imageSrc, url }) {
                     src={imageSrc}
                     alt=""
                     loading="lazy"
+                    decoding="async"
+                    width={1600}
+                    height={800}
                     className="h-auto w-full  object-top"
                 />
             </div>

@@ -15,4 +15,17 @@ export default defineConfig({
             "@": path.resolve(__dirname, "./src"),
         },
     },
+
+    // Ensure the automatic JSX runtime is used everywhere (incl. under Vitest),
+    // so component/test files don't need to import React themselves.
+    esbuild: {
+        jsx: "automatic",
+    },
+
+    test: {
+        environment: "jsdom",
+        globals: true,
+        setupFiles: "./src/test/setup.js",
+        css: false,
+    },
 });

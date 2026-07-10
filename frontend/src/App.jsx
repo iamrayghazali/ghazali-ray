@@ -2,11 +2,10 @@ import './App.css'
 import Hero from "@/pages/home/Hero.jsx";
 import Navbar from "@/components/custom/Navbar.jsx";
 import {LightRays} from "@/components/ui/light-rays.jsx";
-import SkipButton from "@/components/custom/SkipButton.jsx";
 import Bento from "@/components/custom/Bento.jsx";
-import {TooltipProvider} from "@/components/ui/tooltip.jsx";
 import ProjectsScroll from "@/pages/home/Projectscroll.jsx";
 import ScrollTextReveal from "@/components/custom/ScrollTextReveal.jsx";
+import Services from "@/components/custom/Services.jsx";
 import {FaCss3Alt, FaFigma, FaJava, FaJs, FaReact} from "react-icons/fa";
 import {SiExpress, SiMongodb, SiMysql, SiPostgresql, SiTailwindcss, SiTypescript} from "react-icons/si";
 import BackgroundFX from "@/components/custom/BackgroundFX.jsx";
@@ -49,21 +48,31 @@ function App() {
     ];
 
     return (
-        <TooltipProvider>
+        <>
             <BackgroundFX />
             <LightRays/>
-            <SkipButton/>
             <div className="flex justify-center items-center">
                 <Navbar/>
             </div>
             <Hero/>
             {techList.map((tech, index) => (
-                <ScrollTextReveal key={index} label={tech.label} title={tech.title} description={tech.description} logos={tech.logos} first={index === 0} />
+                <ScrollTextReveal
+                    key={index}
+                    index={index}
+                    total={techList.length}
+                    label={tech.label}
+                    title={tech.title}
+                    description={tech.description}
+                    logos={tech.logos}
+                    first={index === 0}
+                />
             ))}
             <ProjectsScroll/>
 
+            <Services/>
+
             <Bento></Bento>
-        </TooltipProvider>
+        </>
     )
 }
 
