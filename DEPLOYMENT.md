@@ -28,10 +28,11 @@ just POSTs to `/contact` as before.
    - Set **To Email** to your inbox: `ghazali.raydan@gmail.com`.
    - Set **Reply To** to `{{reply_to}}` (so you can reply to the visitor).
    - Set the **Subject** to `{{subject}}`.
-   - In the body, use the variables the backend sends: `{{from_email}}` and
-     `{{message}}`. Example body:
+   - In the body, use the variables the backend sends: `{{from}}` (the visitor's
+     email — also available as `{{from_email}}`), `{{message}}`, and `{{time}}`
+     (send time, UTC). Example body:
      ```
-     New message from {{from_email}}
+     New message from {{from}} ({{time}})
 
      {{message}}
      ```

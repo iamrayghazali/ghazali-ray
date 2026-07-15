@@ -16,11 +16,13 @@ export function isValidMessage(msg) {
     return len >= MESSAGE_MIN && len <= MESSAGE_MAX;
 }
 
-export function buildTemplateParams({ email, message }) {
+export function buildTemplateParams({ email, message }, now = new Date()) {
     return {
+        from: email,
         from_email: email,
         reply_to: email,
         subject: `New portfolio message from ${email}`,
         message,
+        time: now.toUTCString(),
     };
 }
