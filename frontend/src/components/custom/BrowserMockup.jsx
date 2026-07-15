@@ -1,4 +1,4 @@
-import {IoBookOutline, IoLockClosed, IoRefreshOutline} from "react-icons/io5";
+import {IoLockClosed} from "react-icons/io5";
 import {LuPanelLeftDashed} from "react-icons/lu";
 import {MdChevronLeft, MdChevronRight} from "react-icons/md";
 import { IoShieldHalfSharp } from "react-icons/io5";
@@ -8,7 +8,7 @@ import {IoIosRefresh} from "react-icons/io";
 
 export default function BrowserMockup({ imageSrc, url }) {
     return (
-        <div className="overflow-hidden rounded-xl border border-border bg-white shadow-2xl">
+        <div className="overflow-hidden rounded-xl border border-border bg-white">
             {/* Browser Top Bar */}
 
 
