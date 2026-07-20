@@ -44,10 +44,15 @@ export function ScrollVelocityContainer({
   );
 }
 
-export function ScrollVelocityRow(props) {
+export function ScrollVelocityRow({ scrollReactivity = true, ...props }) {
   const sharedVelocityFactor = useContext(ScrollVelocityContext)
+  // Constant-speed marquee: skip the scroll subscription entirely so page
+  // scrolling doesn't drive per-frame velocity/spring math.
+  if (!scrollReactivity) {
+    return (<ScrollVelocityRowImpl {...props} scrollReactivity={false} velocityFactor={null} />);
+  }
   if (sharedVelocityFactor) {
-    return (<ScrollVelocityRowImpl {...props} velocityFactor={sharedVelocityFactor} />);
+    return (<ScrollVelocityRowImpl {...props} scrollReactivity velocityFactor={sharedVelocityFactor} />);
   }
   return <ScrollVelocityRowLocal {...props} />;
 }
