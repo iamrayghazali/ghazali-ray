@@ -66,7 +66,7 @@ export default function Navbar() {
         <>
             <nav
                 className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out
-                ${hidden ? "-translate-y-full" : "translate-y-0"} gradient-blur border-b-1 w-full md:max-w-lg h-14 md:rounded-b-lg justify-self-center`}
+                ${hidden ? "-translate-y-full" : "translate-y-0"} gradient-blur border-b-1 w-full md:max-w-lg h-14 md:rounded-b-lg mx-auto`}
                 style={{ paddingTop: "env(safe-area-inset-top)" }}
             >
                 <div className="mx-auto p-2">

@@ -187,12 +187,19 @@ function CornerIcon({ Icon }) {
 function DesignMockup() {
     return (
         <div className="relative flex h-full min-h-56 w-full items-center justify-center overflow-hidden py-8 lg:min-h-0">
-            <DotPattern
-                glow={true}
-                className={cn(
-                    "mask-[radial-gradient(300px_circle_at_center,white,transparent)] opacity-60 dark:opacity-30"
-                )}
-            />
+            {/* Constrained + static: a full-card glowing DotPattern spawns ~800
+                infinitely-animating SVG nodes, which tanks Safari. The radial
+                mask only ever shows the centre, so render a small static patch. */}
+            <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2">
+                <DotPattern
+                    glow={false}
+                    width={22}
+                    height={22}
+                    className={cn(
+                        "mask-[radial-gradient(300px_circle_at_center,white,transparent)] opacity-60 dark:opacity-30"
+                    )}
+                />
+            </div>
             <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

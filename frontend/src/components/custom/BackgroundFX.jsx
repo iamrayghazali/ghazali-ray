@@ -28,7 +28,7 @@ export default function BackgroundFX() {
                 style={{ y: yBlobA }}
                 className="absolute -top-40 left-[8%] w-[480px] h-[480px] rounded-full
                            bg-primary/[0.07] dark:bg-primary/[0.09]
-                           blur-3xl will-change-transform"
+                           blur-2xl transform-gpu will-change-transform"
             />
 
             {/* blob B — neutral, mid right, drifts up ── */}
@@ -36,7 +36,7 @@ export default function BackgroundFX() {
                 style={{ y: yBlobB }}
                 className="absolute top-[42%] right-[4%] w-[560px] h-[560px] rounded-full
                            bg-foreground/[0.035] dark:bg-foreground/[0.05]
-                           blur-3xl will-change-transform"
+                           blur-2xl transform-gpu will-change-transform"
             />
 
             {/* blob C — accent, lower left, drifts up slightly ── */}
@@ -44,7 +44,7 @@ export default function BackgroundFX() {
                 style={{ y: yBlobC }}
                 className="absolute bottom-[5%] left-[28%] w-[420px] h-[420px] rounded-full
                            bg-primary/[0.06] dark:bg-primary/[0.08]
-                           blur-3xl will-change-transform"
+                           blur-2xl transform-gpu will-change-transform"
             />
 
             <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-transparent to-background/50" />

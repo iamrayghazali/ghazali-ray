@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -32,7 +32,6 @@ const Ray = ({
   left,
   rotate,
   width,
-  swing,
   delay,
   duration,
   intensity
@@ -43,13 +42,17 @@ const Ray = ({
       style={
         {
           "--ray-left": `${left}%`,
-          "--ray-width": `${width}px`
+          "--ray-width": `${width}px`,
+          willChange: "opacity",
         }
       }
+      // Rotate is set once (initial) and kept OUT of the animation: animating
+      // rotate on a blurred, blend-mode layer forces Safari to re-rasterise the
+      // blur every frame. Opacity-only lets it cache the texture. The old ±1°
+      // swing was imperceptible anyway.
       initial={{ rotate: rotate }}
       animate={{
         opacity: [0, intensity, 0],
-        rotate: [rotate - swing, rotate + swing, rotate - swing],
       }}
       transition={{
         duration: duration,
@@ -72,12 +75,9 @@ export function LightRays({
   ref,
   ...props
 }) {
-  const [rays, setRays] = useState([])
-  const cycleDuration = Math.max(speed, 0.1)
-
-  useEffect(() => {
-    setRays(createRays(count, cycleDuration))
-  }, [count, cycleDuration])
+  // Rays are generated once (randomised, decorative). A lazy initializer keeps
+  // this off the effect path — no cascading render on mount.
+  const [rays] = useState(() => createRays(count, Math.max(speed, 0.1)))
 
   return (
     <div
