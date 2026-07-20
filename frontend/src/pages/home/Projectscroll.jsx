@@ -107,8 +107,8 @@ function ProgressDot({ index, count, progress }) {
 }
 
 const cardEntrance = {
-    hidden:  { opacity: 0, y: 24, scale: 0.96 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+    hidden:  { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
 };
 
 function ProjectCard({ project, mobile }) {
@@ -118,20 +118,16 @@ function ProjectCard({ project, mobile }) {
     return (
         <motion.div
             className={cn(
-                "flex flex-col gap-4 shrink-0",
+                "flex flex-col gap-4 shrink-0 will-change-transform",
                 mobile ? "w-[82vw]" : "w-[50vw] max-w-2xl"
             )}
             variants={cardEntrance}
             initial="hidden"
             whileInView="visible"
             whileHover={mobile ? undefined : { y: -6, transition: { duration: 0.25 } }}
-            whileTap={{ scale: 0.98 }}
             viewport={{ once: true, amount: 0.4 }}
         >
-            <div
-                className="w-full rounded-xl overflow-hidden shadow-xl shadow-black/15 border border-border/30"
-                style={{ transform: "translateZ(0)" }}
-            >
+            <div className="w-full rounded-xl overflow-hidden shadow-lg shadow-black/10 border border-border/30">
                 <BrowserMockup
                     url={shortUrl}
                     imageSrc={project.src}

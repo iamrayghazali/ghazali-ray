@@ -53,13 +53,19 @@ test("isValidMessage rejects non-strings", () => {
 });
 
 test("buildTemplateParams maps input to EmailJS template variables", () => {
-    const params = buildTemplateParams({
-        email: "visitor@example.com",
-        message: "Hello there\nsecond line",
-    });
+    const now = new Date("2026-07-16T14:30:00Z");
+    const params = buildTemplateParams(
+        {
+            email: "visitor@example.com",
+            message: "Hello there\nsecond line",
+        },
+        now,
+    );
 
+    assert.equal(params.from, "visitor@example.com");
     assert.equal(params.from_email, "visitor@example.com");
     assert.equal(params.reply_to, "visitor@example.com");
     assert.match(params.subject, /visitor@example\.com/);
     assert.equal(params.message, "Hello there\nsecond line");
+    assert.equal(params.time, now.toUTCString());
 });
